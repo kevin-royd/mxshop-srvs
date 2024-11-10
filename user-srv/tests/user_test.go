@@ -82,11 +82,14 @@ func TestCreateUser(t *testing.T) {
 	InitMysql()
 	var user model.User
 	user.Nickname = "test"
-	user.Mobile = "1366666666"
+	user.Mobile = "13666666666"
+	user.Role = 2
+	// GORM 的 Omit 或 Select 配置、零值处理机制导致的。GORM 默认会忽略值为零的字段，而用数据库的默认值来填充。
 	options := &password.Options{16, 100, 32, sha512.New}
 	salt, encodedPwd := password.Encode("123456", options)
 	pwd := fmt.Sprintf("$sha512$%s$%s", salt, encodedPwd)
 	user.Password = pwd
+	fmt.Println(user)
 	tx := db.Create(&user)
 	if tx.Error != nil {
 		fmt.Printf("创建用户失败 %v", tx.Error)

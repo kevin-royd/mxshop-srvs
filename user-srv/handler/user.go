@@ -166,8 +166,6 @@ func (u *UserServer) CheckUserPasswd(ctx context.Context, req *proto.PasswordChe
 	options := &password.Options{SaltLen: 16, Iterations: 100, KeyLen: 32, HashFunction: sha512.New}
 	pwdInfo := strings.Split(req.EncryptedPassword, "$")
 	verify := password.Verify(req.Password, pwdInfo[2], pwdInfo[3], options)
-	fmt.Println(pwdInfo)
-	fmt.Println(verify)
 	return &proto.CheckResponse{
 		Success: verify,
 	}, nil
