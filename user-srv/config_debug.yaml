@@ -15,5 +15,5 @@ consul:
   port: 8500
   name: "user-srv"
   tag:
-    - "user-srv"
+    - "srv"
     - "go"

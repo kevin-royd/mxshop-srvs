@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	ServerConf *config.ServerConfig = &config.ServerConfig{}
+	ServerConf = &config.ServerCfg{}
 	DB         *gorm.DB
 	Consul     *api.Client
 )

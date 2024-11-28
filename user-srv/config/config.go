@@ -1,13 +1,13 @@
 package config
 
-type ServerConfig struct {
-	ServerInfo ServerCfg    `mapstructure:"server"`
+// server
+type ServerCfg struct {
+	ServerInfo ServerConfig `mapstructure:"server"`
 	MysqlInfo  MysqlConfig  `mapstructure:"mysql"`
 	ConsulInfo ConsulConfig `mapstructure:"consul"`
 }
 
-// server
-type ServerCfg struct {
+type ServerConfig struct {
 	Host string `mapstructure:"host"`
 	Port int    `mapstructure:"port"`
 	Name string `mapstructure:"name"`
@@ -23,8 +23,9 @@ type MysqlConfig struct {
 }
 
 type ConsulConfig struct {
-	Host string   `mapstructure:"host"`
-	Port int      `mapstructure:"port"`
-	Name string   `mapstructure:"name"`
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
+	Name string `mapstructure:"name"`
+	Id   string
 	Tag  []string `mapstructure:"tag"`
 }

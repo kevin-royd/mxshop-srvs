@@ -5,6 +5,8 @@ import (
 	"github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
 	"mxshop-srvs/user-srv/global"
+	"strconv"
+	"time"
 )
 
 // InitConsul 创建Consul客户端
@@ -31,10 +33,10 @@ func registerService() {
 		// 指定时间后自动注销不健康的服务节点
 		DeregisterCriticalServiceAfter: "15s",
 	}
-
+	global.ServerConf.ConsulInfo.Id = strconv.FormatInt(time.Now().UnixNano(), 10)
 	// 注册consul中的信息
 	registration := &api.AgentServiceRegistration{
-		ID:      global.ServerConf.ConsulInfo.Name, // 服务唯一ID
+		ID:      global.ServerConf.ConsulInfo.Id,   // 服务唯一ID
 		Name:    global.ServerConf.ConsulInfo.Name, // 服务名称
 		Tags:    global.ServerConf.ConsulInfo.Tag,  // 为服务打标签
 		Address: global.ServerConf.ServerInfo.Host,
